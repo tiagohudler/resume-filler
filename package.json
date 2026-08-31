@@ -1,0 +1,13 @@
+{
+    "devDependencies": {
+        "@types/chrome": "^0.2.7",
+        "@types/node": "^26.4.0",
+        "chrome-types": "^0.1.440",
+        "prettier": "^3.9.6",
+        "typescript": "^7.0.2"
+    },
+    "scripts": {
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    }
+}

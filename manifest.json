@@ -1,0 +1,13 @@
+{
+    "name": "Resume Filler",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": ["sidePanel"],
+    "action": {
+        "default_popup": "src/popup/popup.html"
+    },
+    "side_panel": {
+        "default_path": "src/sidepanel/sidepanel.html"
+    }
+}
