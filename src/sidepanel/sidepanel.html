@@ -1,14 +1,25 @@
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
-        <h1>Resume Filler</h1>
-        <div id="urls">
-            <h2>URLs and Websites</h2>
-        </div>
-        <div id="experience">
-            <h2>Experience</h2>
-        </div>
-        <div id="personal-projects">
-            <h2>Personal Projects and Others</h2>
+        <script src="sidepanel.ts" defer></script>
+
+        <div id="sidePanel">
+            <h1>Resume Filler</h1>
+            <div id="urls">
+                <h2>URLs and Websites</h2>
+                <button id="add-url-button">Add URL</button>
+            </div>
+            <div id="experience">
+                <h2>Experience</h2>
+            </div>
+            <div id="personal-projects">
+                <h2>Personal Projects and Others</h2>
+            </div>
+            
+            <!-- this is used for input forms-->
+            <div id="formOverlay"></div>
         </div>
     </body>
 </html>
