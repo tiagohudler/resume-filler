@@ -2,7 +2,7 @@ var addUrlButton = document.getElementById('add-url-button');
 
 if (addUrlButton != null) {
     addUrlButton.addEventListener('click', async () => {
-        const overlay = document.getElementById("formOverlay");
+        const overlay = document.getElementById("form-overlay");
 
         if (overlay == null) {
             console.log('Could not find form overlay');
@@ -16,7 +16,7 @@ if (addUrlButton != null) {
         overlay.innerHTML = html;
 
         if (overlay != null) {
-            overlay.style.display = "block";
+            overlay.style.display = "flex";
         } else{
             console.log('Could not find form overlay');
         }

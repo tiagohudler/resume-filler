@@ -1,14 +1,28 @@
-#sidePanel {
-    position: relative;
-}
-
-#formOverlay {
+#form-overlay {
     display: none;
-
     position: absolute;
     inset: 0;
-
     z-index: 1000;
 
+    background: rgba(0, 0, 0, 0.5);
+
+    justify-content: center;
+    align-items: center;
+}
+
+#form-container {
     background: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+
+.add-item-button {
+    height: 24px;
 }
