@@ -1,46 +1,46 @@
-var addUrlButton = document.getElementById('add-url-button');
+const addUrlButtons = document.getElementsByClassName('add-url-button');
 
-if (addUrlButton != null) {
-    addUrlButton.addEventListener('click', async () => {
-        const overlay = document.getElementById("form-overlay");
+const overlay = document.getElementById("form-overlay") as HTMLElement;
 
-        if (overlay == null) {
-            console.log('Could not find form overlay');
+for (const button of addUrlButtons) {
+    button.addEventListener('click', async () => {
+
+        var inputType = button.getAttribute('name');
+
+        if (inputType == null) {
+            console.log('Could not get input type');
             return
         }
 
+        // TODO: select form in runtime using input type
         const url = chrome.runtime.getURL("src/forms/urlForm.html");
         const response = await fetch(url);
         const html = await response.text();
 
         overlay.innerHTML = html;
 
-        if (overlay != null) {
-            overlay.style.display = "flex";
-        } else{
-            console.log('Could not find form overlay');
-        }
+        overlay.style.display = "flex";
 
-        addFormEventListener();
+        addFormEventListeners(inputType);
     });
-} else {
-    console.log('Add URL button was not found');
 }
 
-
-function addFormEventListener(){
+function addFormEventListeners(inputKey: string) {
     const form = document.getElementById('input-form') as HTMLFormElement;
 
-    if (form == null) {
-        console.log("Could not find input form");
-        return;
-    }
+    form.addEventListener('submit', async (event: SubmitEvent) => {
+        event.preventDefault();
 
-    form.addEventListener('submit', (event: SubmitEvent) => {
         const formData = new FormData(form);
 
         const formValues = Object.fromEntries(formData.entries());
 
-        console.log(formValues); 
+        await chrome.storage.sync.set({ inputKey: formValues });
+
+        console.log(`Value\n
+            ${JSON.stringify(formValues, null, 2)}\n\n
+            is set in key ${inputKey}`);
+
+        overlay.style.display = "none";
     });
 }
