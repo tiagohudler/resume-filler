@@ -20,7 +20,27 @@ if (addUrlButton != null) {
         } else{
             console.log('Could not find form overlay');
         }
+
+        addFormEventListener();
     });
 } else {
     console.log('Add URL button was not found');
+}
+
+
+function addFormEventListener(){
+    const form = document.getElementById('input-form') as HTMLFormElement;
+
+    if (form == null) {
+        console.log("Could not find input form");
+        return;
+    }
+
+    form.addEventListener('submit', (event: SubmitEvent) => {
+        const formData = new FormData(form);
+
+        const formValues = Object.fromEntries(formData.entries());
+
+        console.log(formValues); 
+    });
 }
