@@ -45,4 +45,10 @@ function addFormEventListeners(inputKey: string) {
 
         overlay.style.display = "none";
     });
+
+    const cancelButton = document.getElementById('form-cancel-button') as HTMLElement;
+
+    cancelButton.addEventListener('click', async () => {
+        overlay.style.display = "none";
+    });
 }
