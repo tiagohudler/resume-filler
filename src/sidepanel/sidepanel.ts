@@ -1,3 +1,5 @@
+import {formMappings} from "../mappings/formMapping.js"
+
 const addUrlButtons = document.getElementsByClassName('add-url-button');
 
 const overlay = document.getElementById("form-overlay") as HTMLElement;
@@ -12,8 +14,8 @@ for (const button of addUrlButtons) {
             return
         }
 
-        // TODO: select form in runtime using input type
-        const url = chrome.runtime.getURL("src/forms/urlForm.html");
+        const sourcePath = formMappings.get(inputType) as string;
+        const url = chrome.runtime.getURL(sourcePath);
         const response = await fetch(url);
         const html = await response.text();
 
