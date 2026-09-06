@@ -1,5 +1,22 @@
 export const formMappings = new Map<string, string>([
-  ["linkedin", "src/forms/urlForm.html"],
-  ["github", "src/forms/urlForm.html"],
-  ["website", "src/forms/urlForm.html"]
+    [
+        "linkedin",
+        "src/forms/urlForm.html"
+    ],
+    [
+        "github",
+        "src/forms/urlForm.html"
+    ],
+    [
+        "website",
+        "src/forms/urlForm.html"
+    ],
+    [
+        "experience",
+        "src/forms/experienceForm.html"
+    ],
+    [
+        "personal-project",
+        "src/forms/personalProjectForm.html"
+    ]
 ]);
