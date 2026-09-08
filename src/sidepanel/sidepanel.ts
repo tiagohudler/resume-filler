@@ -327,7 +327,7 @@ function loadExperiences(experiences: Experience[]) {
         item.className = "experience-item";
 
         const dates = experience.currentJob
-            ? `${experience.startDate} - Atual`
+            ? `${experience.startDate} - Current`
             : `${experience.startDate} - ${experience.endDate}`;
 
         item.innerHTML = `
