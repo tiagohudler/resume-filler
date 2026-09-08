@@ -420,7 +420,9 @@ async function copyToClipboard(text: string) {
     }
 }
 
-function createCopyButton(text: string): HTMLButtonElement {
+function createCopyButton(
+    text: string
+): HTMLButtonElement {
 
     const button = document.createElement("button");
 
@@ -428,31 +430,54 @@ function createCopyButton(text: string): HTMLButtonElement {
 
     button.className = "copy-button";
 
+
     const icon = document.createElement("img");
 
-    icon.src = chrome.runtime.getURL(
+    const copyIconUrl = chrome.runtime.getURL(
         "assets/icons/copyIcon.png"
     );
+
+    const checkIconUrl = chrome.runtime.getURL(
+        "assets/icons/checkIcon.png"
+    );
+
+
+    icon.src = copyIconUrl;
 
     icon.alt = "Copy";
 
     icon.className = "copy-icon";
+
 
     button.appendChild(icon);
 
 
     button.addEventListener("click", async () => {
 
-        await copyToClipboard(text);
+        try {
 
-        // Optional visual feedback
-        button.classList.add("copied");
+            await copyToClipboard(text);
 
-        setTimeout(() => {
+            icon.src = checkIconUrl;
 
-            button.classList.remove("copied");
+            icon.alt = "Copied";
 
-        }, 1000);
+
+            setTimeout(() => {
+
+                icon.src = copyIconUrl;
+
+                icon.alt = "Copy";
+
+            }, 1000);
+
+        } catch (error) {
+
+            console.error(
+                "Could not copy text:",
+                error
+            );
+        }
     });
 
 
