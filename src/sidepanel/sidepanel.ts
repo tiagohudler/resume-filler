@@ -1,7 +1,7 @@
 import { formMappings } from "../mappings/formMapping.js";
-import {Experience} from "../models/experience.js"
-import {PersonalProject} from "../models/personalProject.js"
-import {UrlData} from "../models/url.js"
+import { Experience } from "../models/experience.js"
+import { PersonalProject } from "../models/personalProject.js"
+import { UrlData } from "../models/url.js"
 
 const addUrlButtons = document.getElementsByClassName("add-url-button");
 
@@ -96,10 +96,6 @@ function addFormEventListeners(inputKey: string) {
     ) as HTMLButtonElement;
 
 
-    // -------------------------
-    // EXPERIENCE SPECIAL LOGIC
-    // -------------------------
-
     if (inputKey === "experience") {
 
         const currentJobCheckbox = document.getElementById(
@@ -126,11 +122,6 @@ function addFormEventListeners(inputKey: string) {
         });
     }
 
-
-    // -------------------------
-    // SUBMIT
-    // -------------------------
-
     form.addEventListener("submit", async (event) => {
 
         event.preventDefault();
@@ -147,11 +138,6 @@ function addFormEventListeners(inputKey: string) {
 
         await loadStoredData();
     });
-
-
-    // -------------------------
-    // CANCEL
-    // -------------------------
 
     cancelButton.addEventListener("click", (event) => {
 
@@ -220,26 +206,26 @@ async function saveFormData(
 
     if (inputKey === "personal-project") {
 
-    const result = await chrome.storage.sync.get(
-        "personalProjects"
-    );
+        const result = await chrome.storage.sync.get(
+            "personalProjects"
+        );
 
-    const personalProjects: PersonalProject[] =
-        (result.personalProjects as PersonalProject[] | undefined) ?? [];
+        const personalProjects: PersonalProject[] =
+            (result.personalProjects as PersonalProject[] | undefined) ?? [];
 
-    const project: PersonalProject = {
-        name: String(formValues.name),
-        description: String(formValues.description)
-    };
+        const project: PersonalProject = {
+            name: String(formValues.name),
+            description: String(formValues.description)
+        };
 
-    personalProjects.push(project);
+        personalProjects.push(project);
 
-    await chrome.storage.sync.set({
-        personalProjects: personalProjects
-    });
+        await chrome.storage.sync.set({
+            personalProjects: personalProjects
+        });
 
-    return;
-}
+        return;
+    }
 }
 
 
