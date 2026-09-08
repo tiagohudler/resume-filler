@@ -267,33 +267,58 @@ function loadUrls(data: Record<string, any>) {
 
     urlItems.forEach((item) => {
 
+        // TODO: dont use button for name
         const button = item.querySelector(
             ".add-url-button"
         ) as HTMLButtonElement;
 
+        const containerToAdd = item.querySelector(
+            ".url-name-and-content"
+        ) as HTMLButtonElement;
+
         const inputType = button.name;
 
-        const existingValue = item.querySelector(
-            ".stored-url"
+        const existingContainer = item.querySelector(
+            ".stored-url-container"
         );
 
-        if (existingValue) {
-            existingValue.remove();
+        if (existingContainer) {
+            existingContainer.remove();
         }
 
         if (data[inputType]?.url) {
 
+            const urlContainer =
+                document.createElement("div");
+
+            urlContainer.className =
+                "stored-url-container";
+
             const urlElement =
                 document.createElement("div");
 
-            urlElement.className = "stored-url";
+            urlElement.className =
+                "stored-url";
 
             urlElement.textContent =
                 data[inputType].url;
 
-            item.insertBefore(
-                urlElement,
-                button
+            const copyButton =
+                createCopyButton(
+                    data[inputType].url
+                );
+
+
+            urlContainer.appendChild(
+                urlElement
+            );
+
+            urlContainer.appendChild(
+                copyButton
+            );
+
+            containerToAdd.appendChild(
+                urlContainer
             );
         }
     });
@@ -380,6 +405,59 @@ function loadPersonalProjects(projects: PersonalProject[]) {
     });
 }
 
+
+// =========================
+// COPY TO CLIPBOARD BUTTON
+// =========================
+
+async function copyToClipboard(text: string) {
+    try {
+        await navigator.clipboard.writeText(text);
+
+        console.log("Copied to clipboard:", text);
+    } catch (error) {
+        console.error("Could not copy text:", error);
+    }
+}
+
+function createCopyButton(text: string): HTMLButtonElement {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+
+    button.className = "copy-button";
+
+    const icon = document.createElement("img");
+
+    icon.src = chrome.runtime.getURL(
+        "assets/icons/copyIcon.png"
+    );
+
+    icon.alt = "Copy";
+
+    icon.className = "copy-icon";
+
+    button.appendChild(icon);
+
+
+    button.addEventListener("click", async () => {
+
+        await copyToClipboard(text);
+
+        // Optional visual feedback
+        button.classList.add("copied");
+
+        setTimeout(() => {
+
+            button.classList.remove("copied");
+
+        }, 1000);
+    });
+
+
+    return button;
+}
 
 // =========================
 // INITIAL LOAD

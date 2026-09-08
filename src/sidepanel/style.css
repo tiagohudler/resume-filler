@@ -193,6 +193,22 @@ body {
     border-color: #d1d5db;
 }
 
+.url-name-and-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.stored-url {
+    padding-right: 10px;
+    padding-left: 20px;
+}
+
+.stored-url-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 
 /* ================================
    URL VALUE
@@ -568,4 +584,49 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
+}
+
+
+/* ================================
+   COPY BUTTON
+================================ */
+
+.copy-button {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border: none;
+    background: none;
+
+    padding: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.copy-icon {
+    width: 16px;
+    height: 16px;
+
+    object-fit: contain;
+}
+
+.copy-button:hover {
+    background: #f3f4f6;
+
+    border-color: #9ca3af;
+}
+
+.copy-button:active {
+    transform: scale(0.95);
 }
